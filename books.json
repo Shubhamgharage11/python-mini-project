@@ -1,0 +1,44 @@
+[
+    {
+        "id": "b001",
+        "title": "data staructure",
+        "author": "xyz",
+        "status": "Available",
+        "issued_to": ""
+    },
+    {
+        "id": "b002",
+        "title": "web development",
+        "author": "abc",
+        "status": "Available",
+        "issued_to": ""
+    },
+    {
+        "id": "b003",
+        "title": "app development",
+        "author": "bcd",
+        "status": "Available",
+        "issued_to": ""
+    },
+    {
+        "id": "b006",
+        "title": "chemisrty",
+        "author": "dsakjk",
+        "status": "Available",
+        "issued_to": ""
+    },
+    {
+        "id": "b007",
+        "title": "english",
+        "author": "yc",
+        "status": "Available",
+        "issued_to": ""
+    },
+    {
+        "id": "b008",
+        "title": "introduction to blockhain",
+        "author": "imran bashir",
+        "status": "Available",
+        "issued_to": ""
+    }
+]

@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Search Book</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><div class="form-container"><h1>Search Book</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+<form method="POST"><label>Enter Book ID</label><input type="text" name="book_id" required><button type="submit">Search</button></form>
+{% if results %}<h2>Search Results</h2>{% for book in results %}<div class="result-card"><p><strong>Book ID:</strong> {{ book.id }}</p><p><strong>Title:</strong> {{ book.title }}</p><p><strong>Author:</strong> {{ book.author }}</p><p><strong>Status:</strong> {{ book.status }}</p><p><strong>Issued To:</strong> {{ book.issued_to or "-" }}</p></div>{% endfor %}{% endif %}
+<a class="back-link" href="{{ url_for('index') }}">Back to Dashboard</a></div></body></html>

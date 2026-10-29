@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <header><h1>Library Management System</h1><p>Manage your library books easily</p></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}
+    {% endwith %}
+    <div class="dashboard">
+        <div class="card"><h3>Total Books</h3><p>{{ total_books }}</p></div>
+        <div class="card"><h3>Available Books</h3><p>{{ available_books }}</p></div>
+        <div class="card"><h3>Issued Books</h3><p>{{ issued_books }}</p></div>
+    </div>
+    <nav>
+        <a href="{{ url_for('index') }}">Dashboard</a>
+        <a href="{{ url_for('add_book') }}">Add Book</a>
+        <a href="{{ url_for('search_book') }}">Search Book</a>
+        <a href="{{ url_for('issue_book') }}">Issue Book</a>
+    </nav>
+    <h2>Book Collection</h2>
+    {% if books %}
+    <div class="table-wrapper"><table>
+        <thead><tr><th>Book ID</th><th>Title</th><th>Author</th><th>Status</th><th>Issued To</th><th>Action</th></tr></thead>
+        <tbody>{% for book in books %}<tr>
+            <td>{{ book.id }}</td><td>{{ book.title }}</td><td>{{ book.author }}</td>
+            <td><span class="status {{ book.status | lower }}">{{ book.status }}</span></td>
+            <td>{{ book.issued_to or "-" }}</td><td>
+                {% if book.status == "Issued" %}
+                <form action="{{ url_for('return_book', book_id=book.id) }}" method="POST" class="inline-form"><button class="return-btn" type="submit">Return</button></form>
+                {% endif %}
+                <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this book?');"><button class="delete-btn" type="submit">Delete</button></form>
+            </td>
+        </tr>{% endfor %}</tbody>
+    </table></div>
+    {% else %}<p class="empty">No books available. Add your first book!</p>{% endif %}
+</div>
+</body></html>
